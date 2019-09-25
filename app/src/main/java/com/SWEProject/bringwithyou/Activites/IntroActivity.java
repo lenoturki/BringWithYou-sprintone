@@ -76,9 +76,9 @@ private ViewPager screenPager;
         // fill list screen
 
         final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Fast Delivery","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, consectetur  consectetur adipiscing elit",R.drawable.img4));
-        mList.add(new ScreenItem("Easy Payment","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, consectetur  consectetur adipiscing elit",R.drawable.img3));
-        mList.add(new ScreenItem("Be Our Member","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, consectetur  consectetur adipiscing elit",R.drawable.logo));
+        mList.add(new ScreenItem("Fast Delivery","Have a very fast delivery from KSU Students",R.drawable.img4));
+        mList.add(new ScreenItem("Easy Payment","Have an Easy pay after delivery process",R.drawable.img3));
+        mList.add(new ScreenItem("Be Our Member","Be our member and fill up your free time , or just order in your busy time ",R.drawable.logo2));
 
 
         // setup viewpager

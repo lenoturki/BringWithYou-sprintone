@@ -1,8 +1,12 @@
 package com.SWEProject.bringwithyou.Activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.SWEProject.bringwithyou.Fregments.ProfileFragment;
+import com.SWEProject.bringwithyou.Fregments.SettingFragment;
 import com.SWEProject.bringwithyou.R;
+import com.SWEProject.bringwithyou.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -121,11 +125,22 @@ public class Home2 extends AppCompatActivity  implements NavigationView.OnNaviga
     public boolean onNavigationItemSelected(MenuItem item){
         int id=item.getItemId();
         if(id==R.id.nav_home) {
-        }else if (id==R.id.nav_gallery){ }
-        else if (id==R.id.nav_slideshow){
-        }//else if(id==R.id.nav_manage){}
-        else if(id==R.id.nav_share){}
-        else if(id==R.id.nav_logout){}
+            getSupportActionBar().setTitle("Home");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
+        }else if (id==R.id.nav_profile){
+            getSupportActionBar().setTitle("Profile");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new ProfileFragment()).commit();
+        }
+        else if (id==R.id.nav_settings){
+            getSupportActionBar().setTitle("Setting");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,new SettingFragment()).commit();
+
+        }else if(id==R.id.nav_signout){
+            FirebaseAuth.getInstance().signOut();
+            Intent login =new Intent(getApplicationContext(),Login.class);
+            startActivity(login);
+            finish();
+        }
         DrawerLayout drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -147,7 +162,15 @@ public class Home2 extends AppCompatActivity  implements NavigationView.OnNaviga
         navUserMail.setText(currentUser.getEmail());
         navUsername.setText(currentUser.getDisplayName());
 
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhot);
+
+        if(currentUser.getPhotoUrl() != null){
+
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhot);}
+
+        else {
+            Glide.with(this).load(R.drawable.logo3).into(navUserPhot);
+
+        }
 
 
     }

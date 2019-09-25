@@ -44,87 +44,78 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <EditText
-        android:background="@drawable/reg_edittext_style"
-        android:hint="@string/name"
         android:id="@+id/RegName"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:background="@drawable/reg_edittext_style"
 
-        app:layout_constraintBottom_toTopOf="@+id/RegUName"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/RegEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints=""
+        app:layout_constraintTop_toBottomOf="@+id/regUserPhoto"
         tools:targetApi="o" />
 
     <EditText
-        android:background="@drawable/reg_edittext_style"
-        android:id="@+id/RegUName"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:ems="10"
-        android:hint="@string/user_name"
-        android:inputType="textPersonName"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints=""
-        tools:targetApi="o" />
-
-    <EditText
-        android:background="@drawable/reg_edittext_style"
-
-        android:hint="@string/e_mail"
         android:id="@+id/RegEmail"
+
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:background="@drawable/reg_edittext_style"
         android:ems="10"
+        android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/RegPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegUName"
-        android:autofillHints=""
+        app:layout_constraintTop_toBottomOf="@+id/RegName"
         tools:targetApi="o" />
 
     <EditText
-        android:background="@drawable/reg_edittext_style"
-        android:hint="@string/phone_number"
         android:id="@+id/RegPhone"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:background="@drawable/reg_edittext_style"
         android:ems="10"
+        android:hint="@string/phone_number"
         android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/RegPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegEmail"
-        android:autofillHints=""
         tools:targetApi="o" />
 
     <EditText
-        android:background="@drawable/reg_edittext_style"
-
-        android:hint="@string/password"
         android:id="@+id/RegPass"
+
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:background="@drawable/reg_edittext_style"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/RegPass2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegPhone"
-        android:autofillHints=""
         tools:targetApi="o" />
 
     <Button
@@ -142,20 +133,22 @@
         app:layout_constraintTop_toBottomOf="@+id/RegPass2" />
 
     <EditText
-        android:background="@drawable/reg_edittext_style"
-
-        android:hint="@string/confirm_password"
         android:id="@+id/RegPass2"
+
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="50dp"
+        android:autofillHints=""
+        android:background="@drawable/reg_edittext_style"
         android:ems="10"
+        android:hint="@string/confirm_password"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RegPass"
-        android:autofillHints=""
         tools:targetApi="o" />
 
     <ProgressBar

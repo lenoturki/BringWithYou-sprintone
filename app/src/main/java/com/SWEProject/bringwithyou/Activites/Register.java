@@ -65,13 +65,13 @@ public class Register extends AppCompatActivity {
         toLogin=findViewById(R.id.toLogin);
         mAuth = FirebaseAuth.getInstance();
         final Intent loginActivity = new Intent(this,Login.class);
-        toLogin.setOnClickListener(new View.OnClickListener() {
+       /* toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(loginActivity);
                 finish();
             }
-        });
+        });*/
 
         loadingProgress.setVisibility(View.INVISIBLE);
         regButton =findViewById(R.id.RegButton);
@@ -89,36 +89,63 @@ public class Register extends AppCompatActivity {
               final String name = userName.getText().toString();
               final String Phone = userPhone.getText().toString();
 
-              int index=email.length()-10;
-              String path=email.substring(index).toLowerCase();
 
 
-              if(email.isEmpty() || name.isEmpty() || password.isEmpty()  || Phone.isEmpty() || !password.equals(password2) || path!="ksu.edu.sa"){
+              if( name.isEmpty() || password.isEmpty()  || Phone.isEmpty()  || password2.isEmpty()){
 
                   // something gone wrong all field must be field
                   // we need to display an error message
-                  if(path!="ksu.edu.sa"){
-                      showMessage("please Enter your KSU email!! ") ;
-                      regButton.setVisibility(View.VISIBLE);
-                      loadingProgress.setVisibility(View.INVISIBLE);
-                  }
-                  else{
+
+
+
+
+
                   showMessage("please Verify all Fields") ;
                   regButton.setVisibility(View.VISIBLE);
-                  loadingProgress.setVisibility(View.INVISIBLE);}
+                  loadingProgress.setVisibility(View.INVISIBLE);
+
+
+
 
 
               }
+
+
+
+
+
+
+
+
+
 
               else{
 
                   // everthing is ok all field are filled  now we can start creating user account
                   //CreateUserAccount method will try to create the user if the email is valid
 
+                  if(!password.equals(password2)){
+                      showMessage("Password does not match") ;
+                      regButton.setVisibility(View.VISIBLE);
+                      loadingProgress.setVisibility(View.INVISIBLE);
 
-                  CreateUserAccount (email,name,password );
+                  }
 
-              }
+                  if(email.contains("ksu.edu.sa")){
+                      CreateUserAccount (email,name,password );
+
+                  }
+                  else{
+
+
+                  showMessage("please Enter your KSU email!! ") ;
+                  regButton.setVisibility(View.VISIBLE);
+                  loadingProgress.setVisibility(View.INVISIBLE);}
+
+
+                  }
+
+
 
 
 
@@ -148,6 +175,8 @@ public class Register extends AppCompatActivity {
         });
     }
 
+
+
     private void CreateUserAccount(String email, final String name, String password) {
 
         // this method create user account with specific email and password
@@ -162,16 +191,32 @@ public class Register extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         // user account create succesfully
-                                        showMessage("Account Created succesfully,Please check your email for verification");
-                                        regButton.setVisibility(View.VISIBLE);
+                                        showMessage("Account Created successfully,Please check your email for verification");
+
+
+                                        //if the image is null
+                                        if(pickedImgUri!=null){
+                                        updateUserInfo(name, pickedImgUri, mAuth.getCurrentUser() );
+                                        /*regButton.setVisibility(View.VISIBLE);
                                         loadingProgress.setVisibility(View.INVISIBLE);
                                         Intent login = new Intent(getApplicationContext(), Login.class);
                                         startActivity(login);
-                                        finish();
+                                        finish();*/}
+                                        else {
+
+
+                                            updateUserInfoWithoutPhoto(name,mAuth.getCurrentUser());
+                                            /*regButton.setVisibility(View.VISIBLE);
+                                            loadingProgress.setVisibility(View.INVISIBLE);
+                                            Intent login = new Intent(getApplicationContext(), Login.class);
+                                            startActivity(login);
+                                            finish();*/
+                                        }
+
 
 
                                         // after we created user account we need to update his profile picture and name
-                                        //updateUserInfo(name, pickedImgUri, mAuth.getCurrentUser() );
+
                                     }
                                     else{
                                         // user account create succesfully
@@ -229,7 +274,7 @@ public class Register extends AppCompatActivity {
 
                                     if(task.isSuccessful()){
                                         // user info updated successful
-                                        showMessage("Register Complete");
+                                        showMessage("Register completed ,please verify Your Email");
                                         updateUI();
                                     }
 
@@ -249,9 +294,41 @@ public class Register extends AppCompatActivity {
 
     }
 
+
+    private void updateUserInfoWithoutPhoto(final String name, final FirebaseUser currentUser) {
+
+
+                        UserProfileChangeRequest profileUpdate =new UserProfileChangeRequest.Builder()
+                                .setDisplayName(name)
+
+                                .build();
+
+
+                        currentUser.updateProfile(profileUpdate)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+                                            // user info updated successful
+                                            showMessage("Register completed ,please verify Your Email");
+                                            updateUI();
+                                        }
+
+                                    }
+                                });
+
+
+
+
+
+
+
+    }
+
     private void updateUI() {
 
-        Intent homeActivity = new Intent(getApplicationContext(), Home2.class);
+        Intent homeActivity = new Intent(getApplicationContext(), Login.class);
         startActivity(homeActivity);
         finish();
 
@@ -283,7 +360,7 @@ public class Register extends AppCompatActivity {
        != PackageManager.PERMISSION_GRANTED) {
            if(ActivityCompat.shouldShowRequestPermissionRationale(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
 
-    Toast.makeText(Register.this , "Please accept for requierd permission" ,Toast.LENGTH_SHORT).show();
+    Toast.makeText(Register.this , "Please accept for required permission" ,Toast.LENGTH_SHORT).show();
            }
 
            else{
